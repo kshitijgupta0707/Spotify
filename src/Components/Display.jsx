@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import DisplayHome from './DisplayHome'
 import DisplayAlbum from './DisplayAlbum'
 import { albumsData } from '../assets/assets'
+import Search from './Search'
 import Songscreen from './Songscreen'
 const Display = () => {
 
@@ -39,6 +40,10 @@ const Display = () => {
         </Route>
 
         <Route path='/song' element={<Songscreen />}>
+        </Route>
+
+        
+        <Route path='/search' element={<Search />}>
         </Route>
 
       </Routes>

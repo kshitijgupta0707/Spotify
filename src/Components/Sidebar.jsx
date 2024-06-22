@@ -6,7 +6,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
     return (
         //lg-flex
-        <div className=' h-full p-2 flex flex-col gap-2  text-white hidden sm:flex ' >
+        <div className=' h-full p-2  flex-col gap-2  text-white hidden sm:flex ' >
 
 
             <div className='bg-[#121212] h-[20%] rounded flex flex-col justify-evenly ' >
@@ -15,10 +15,10 @@ const Sidebar = () => {
                         <img className=' w-6' src={assets.home_icon} alt="" />
                         <p className='font-bold' > Home</p>
                     </div>
-                    <img className='w-6 h-4' src={assets.arrow_left} alt="" />
                 </div>
-                <div className='flex items-center gap-3 pl-8 cursor-pointer' >
+                <div onClick={() => { navigate('/search') }} className='flex items-center gap-3 pl-8 cursor-pointer' >
                     <img className=' w-6' src={assets.search_icon} alt="" />
+
                     <p className='font-bold' > Search</p>
                 </div>
 

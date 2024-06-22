@@ -25,7 +25,7 @@ const Songscreen = () => {
 
     return (
         <>
-            <div ref={mainn} className='main' >
+            <div ref={mainn} className='head' >
                 <div style={divStyle} className='bg-image w-72 ' >
 
                 </div>

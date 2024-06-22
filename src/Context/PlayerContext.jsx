@@ -51,6 +51,13 @@ const PlayerContextProvider = (props) => {
         setPlayStatus(true);
     }
 
+    const playWithAudio = async (audio) => {
+        pause();
+        await setTrack(audio)
+        await audioRef.current.play();
+        setPlayStatus(true);
+    }
+
     async function prev() {
         if (track.id > 0) {
             await setPlayStatus(false);
@@ -183,7 +190,8 @@ const PlayerContextProvider = (props) => {
         volume,
         handleVolumeChange,
         handleSeek, onlyChangeSlideBar,
-        handleMouseDown, handleMouseUp
+        handleMouseDown, handleMouseUp,
+        playWithAudio
     }
 
     return (
