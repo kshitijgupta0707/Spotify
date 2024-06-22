@@ -1,0 +1,10 @@
+.play-icon {
+  /* width: 4rem; Initial size */
+  transition: all 0.2s ease; /* Smooth transition for size and color */
+  cursor: pointer;
+}
+
+.play-icon.clicked {
+  transform: scale(1.2); /* Increase size on click */
+  filter: brightness(0.8); /* Change color to slightly darker */
+}
