@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { PlayerContext } from '../Context/PlayerContext'
 import { useLocation, useNavigate } from 'react-router-dom'
+import './Player.css'
 const Player = () => {
 
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Player = () => {
 
     return (
         <div className=' h-[10%] bg-black flex justify-between items-center text-white px-4' >
-            <div className=' hidden lg:flex items-center gap-4 ' >
+            <div className='leftPlayer' >
                 <img onClick={() => {
                     console.log(location);
                     if (location === '/song')
@@ -24,12 +25,12 @@ const Player = () => {
 
                 }} className='w-12' src={track.image} alt="" />
                 <div>
-                    <p>{track.name}</p>
+                    <p>{track.name.slice(0,23)}</p>
                     <p>{track.desc.slice(0, 12)}</p>
                 </div>
             </div>
 
-            <div className='flex flex-col items-center gap-1 m-auto' >
+            <div className='flex flex-col items-center gap-1 m-auto ' >
                 <div className='flex gap-4' >
                     <img className='w-4 cursor-pointer' src={assets.shuffle_icon} alt="" />
                     <img onClick={prev} className='w-4 cursor-pointer' src={assets.prev_icon} alt="" />
@@ -41,18 +42,18 @@ const Player = () => {
 
 
                 <div className='flex items-center gap-5' >
-                    <p>{`${time.currentTime.minute} : ${time.currentTime.second}`}</p>
+                    <p className='timee'  >{`${time.currentTime.minute} : ${time.currentTime.second}`}</p>
                     <div onMouseDown={handleMouseDown} onClick={handleSeek} ref={seekBg} className='w-[60vw] max-w-[500px]  bg-gray-300 rounded-full cursor-pointer relative' >
                         {/* <div className=' w-fit' >.</div> */}
                         <hr ref={seekBar} className='h-1.5 w-[0%] bg-green-700 border-none  z-10 relative ' />    {/* <hr className='h-1  border-none w-0 bg-green-800 rounded-full' /> */}
                         <hr ref={seekBar2} className='h-1.5 w-[0%] bg-[#494949] border-none absolute top-0 z-5  max-w-[100%]' />    {/* <hr className='h-1  border-none w-0 bg-green-800 rounded-full' /> */}
                     </div>
 
-                    <p>{isNaN(time.totalTime.minute) ? "00:00" : `${time.totalTime.minute} : ${time.totalTime.second}`}</p>
+                    <p className='timee' >{isNaN(time.totalTime.minute) ? "00:00" : `${time.totalTime.minute} : ${time.totalTime.second}`}</p>
                 </div>
 
             </div>
-            <div className='hidden lg:flex items-center gap-2 opacity-75' >
+            <div className='rightPlayer' >
                 <img className='w-4' src={assets.plays_icon} alt="" />
                 <img className='w-4' src={assets.mic_icon} alt="" />
                 <img className='w-4' src={assets.queue_icon} alt="" />

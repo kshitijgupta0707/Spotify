@@ -1,6 +1,6 @@
 //we are using create context API
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useRef } from "react";
 import { songsData } from "../assets/assets";
 
@@ -8,7 +8,8 @@ export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
 
-    const audioRef = useRef();
+    const audioRef = useRef(songsData[0]);
+    const searchInputRef = useRef();
     const seekBg = useRef();
     const seekBar = useRef();
     const seekBar2 = useRef();
@@ -27,6 +28,7 @@ const PlayerContextProvider = (props) => {
     });
     const [trackEnded, setTrackEnded] = useState(false);
     const [volume, setVolume] = useState(1);
+    const [loaded, setLoaded] = useState(false);
     const handleVolumeChange = (event) => {
         const newVolume = event.target.value;
         setVolume(newVolume);
@@ -52,7 +54,7 @@ const PlayerContextProvider = (props) => {
     }
 
     const playWithAudio = async (audio) => {
-        pause();
+        await pause();
         await setTrack(audio)
         await audioRef.current.play();
         setPlayStatus(true);
@@ -68,11 +70,12 @@ const PlayerContextProvider = (props) => {
         }
     }
     async function next() {
+
         if (track.id <= songsData.length - 2) {
+
             await setPlayStatus(false);
             await setTrack(songsData[track.id + 1]);
-            await audioRef.current.play();
-            setPlayStatus(true);
+            play()
             console.log("next music is played");
         }
     }
@@ -80,32 +83,37 @@ const PlayerContextProvider = (props) => {
 
 
     useEffect(() => {
-        setTimeout(() => {
-            audioRef.current.ontimeupdate = () => {
-                const sec = Math.floor(audioRef.current.currentTime % 60)
-                const min = Math.floor(audioRef.current.currentTime / 60)
-                seekBar.current.style.width = (Math.floor(audioRef.current.currentTime / audioRef.current.duration * 100)) + "%";
-                setTime({
-                    currentTime: {
-                        minute: min < 10 ? '0' + min : min.toString(),
-                        second: sec < 10 ? '0' + sec : sec.toString()
-                    },
-                    totalTime: {
-                        second: Math.floor(audioRef.current.duration % 60),
-                        minute: Math.floor(audioRef.current.duration / 60)
+
+        console.log("audio ref not initialzed");
+        if (audioRef.current) {
+            console.log("audio ref initialzed");
+            setTimeout(() => {
+
+                audioRef.current.ontimeupdate = () => {
+                    const sec = Math.floor(audioRef.current.currentTime % 60)
+                    const min = Math.floor(audioRef.current.currentTime / 60)
+                    seekBar.current.style.width = (Math.floor(audioRef.current.currentTime / audioRef.current.duration * 100)) + "%";
+                    setTime({
+                        currentTime: {
+                            minute: min < 10 ? '0' + min : min.toString(),
+                            second: sec < 10 ? '0' + sec : sec.toString()
+                        },
+                        totalTime: {
+                            second: Math.floor(audioRef.current.duration % 60),
+                            minute: Math.floor(audioRef.current.duration / 60)
+                        }
+                    })
+                    if (audioRef.current.currentTime == audioRef.current.duration) {
+                        console.log("track endedd")
+                        pause()
+                        audioRef.current.currentTime = 0;
+                        console.log(audioRef.current.currentTime);
+                        setTrackEnded(true);
                     }
-                })
-                if (audioRef.current.currentTime == audioRef.current.duration) {
-                    console.log("track endedd")
-                    pause()
-                    audioRef.current.currentTime = 0;
-                    console.log(audioRef.current.currentTime);
-                    setTrackEnded(true);
-
-
                 }
-            }
-        }, 0)
+            }, 0)
+
+        }
     }, [audioRef])
     const [isDragging, setIsDragging] = useState(false);
 
@@ -127,27 +135,54 @@ const PlayerContextProvider = (props) => {
     useEffect(() => {
         if (trackEnded) {
             change();
-            setTrackEnded(false); // Reset trackEnded state
         }
     }, [trackEnded]);
     async function change() {
-        await next()
-        await play()
+        setPlayStatus(false);
+        await audioRef.current.pause();
+
+
+        await setTime({
+            currentTime: {
+                second: 0,
+                minute: 0
+            },
+            totalTime: {
+                second: 0,
+                minute: 0
+            }
+        })
+        audioRef.current.currentTime = 0;
+        if (track.id < songsData.length - 1) {
+            await setTrack(songsData[track.id + 1]);
+        }
+        await audioRef.current.play()
+        setPlayStatus(true);
+        setTrackEnded(false); // Reset trackEnded state
+        pause()
+        play()
 
     }
+
+
+
+
+
+
     const handleSeek = (e) => {
         const seekBarRect = seekBg.current.getBoundingClientRect();
         // it provide the the x coordinates of extreme left div
-        console.log(seekBarRect.left);
+        // console.log(seekBarRect.left);
         // it provide the the x coordinates of extreme right div
-        console.log(e.clientX);
-        console.log(seekBarRect.right);
+        // console.log(e.clientX);
+        // console.log(seekBarRect.right);
         const clickPositionX = e.clientX - seekBarRect.left;
         const percentage = (clickPositionX / seekBarRect.width) * 100;
         const totalTime = time.totalTime.minute * 60 + time.totalTime.second
         const updatedTime = (percentage / 100) * totalTime;
         const updatedMin = Math.floor(updatedTime / 60);
         const updatedSec = Math.floor(updatedTime % 60);
+        console.log(`updated to ${updatedMin} : ${updatedSec}`)
         setTime({
             currentTime: {
                 minute: updatedMin < 10 ? '0' + updatedMin : updatedMin.toString(),
@@ -158,6 +193,11 @@ const PlayerContextProvider = (props) => {
                 minute: Math.floor(audioRef.current.duration / 60)
             }
         })
+
+
+
+
+
         seekBar.current.style.width = (Math.floor(audioRef.current.currentTime / audioRef.current.duration * 100)) + "%";
         seekBar2.current.style.width = "0%";
         audioRef.current.currentTime = updatedTime
@@ -178,7 +218,7 @@ const PlayerContextProvider = (props) => {
     }
 
     const contextValue = {
-        audioRef,
+        audioRef, searchInputRef,
         seekBg,
         seekBar, seekBar2,
         track, setTrack,
@@ -191,7 +231,8 @@ const PlayerContextProvider = (props) => {
         handleVolumeChange,
         handleSeek, onlyChangeSlideBar,
         handleMouseDown, handleMouseUp,
-        playWithAudio
+        playWithAudio,
+        loaded, setLoaded
     }
 
     return (
@@ -203,3 +244,4 @@ const PlayerContextProvider = (props) => {
 
 }
 export default PlayerContextProvider;
+export const useStateProvider = () => useContext(PlayerContext)

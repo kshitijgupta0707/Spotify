@@ -33,7 +33,7 @@ const Display = () => {
 
       <Routes>
 
-        <Route path='/' element={<DisplayHome />} >
+        <Route path='/Home' element={<DisplayHome />} >
         </Route>
         {/* : helps to take id  in display album elemnenbt componenet  */}
         <Route path='/album/:id' element={<DisplayAlbum />}>

@@ -3,6 +3,7 @@ import NavBar from './NavBar'
 import { useParams } from 'react-router-dom'
 import { albumsData, assets, songsData } from '../assets/assets';
 import { PlayerContext } from '../Context/PlayerContext';
+import './DisplayAlbum.css'
 const DisplayAlbum = () => {
     // const { playWithId } = useContext(PlayerContext);
     const { id } = useParams();
@@ -28,7 +29,7 @@ const DisplayAlbum = () => {
                     <p>Playlist</p>
                     <h2 className='text-5xl font-bold mb-4 md:text-7xl' >{albumData.name}</h2>
                     <h4>{albumData.desc}</h4>
-                    <p className='mt-1 flex gap-2  w-100'>
+                    <p className='spotifyContainer'>
                         <img className='w-5 inline' src={assets.spotify_logo} alt="" />
                         <b>Spotify </b>
                         1,323,154 likes
@@ -38,26 +39,26 @@ const DisplayAlbum = () => {
                 </div>
             </div>
 
-            <div className=' {bg}} grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7]'  >
-                <p> <b className='mr-4' >#</b>Title </p>
-                <p>Album</p>
-                <p className='hidden sm:block'  >Date added</p>
-                <img className='m-auto w-6' src={assets.clock_icon} alt="" />
+            <div className=' gridHeading '  >
+                <p className=' text-left' > <b className='mr-4' >#</b>Title </p>
+                <p className='trending' > Album</p>
+                <p className=' dateAdded '  >Date added</p>
+                <img className='gridImage' src={assets.clock_icon} alt="" />
             </div>
             <hr />
             {
                 albumData.songs.map(value => {
-                  return  <div onClick={() => { playWithId(value) }} key={value} className='grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer' >
+                    return <div   onClick={() => { playWithId(value) }} key={value} className= ' gridValues' >
 
-                        <p className='text-white' >
+                        <p className='text-white text-left ' >
                             <b className='mr-4 text-[#a7a7a7]' >
                                 {value + 1}
                             </b>
-                            <img className=' hidden sm:inline  w-10 mr-5 ' src={songsData[value].image} alt="" />
+                            <img className=' imageimage dateAdded ' src={songsData[value].image} alt="" />
                             {songsData[value].name}
                         </p>
-                        <p className='text-[15px]' > {albumData.name} </p>
-                        <p className='text-[15px] hidden sm:block ' > 5 days ago</p>
+                        <p className='text-[15px]  trending' > {albumData.name} </p>
+                        <p className='text-[15px]   dateAdded  ' > 5 days ago</p>
                         <p className='text-[15px] text-center ' > {songsData[value].duration}  </p>
 
 

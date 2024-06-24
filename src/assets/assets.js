@@ -22,6 +22,10 @@ import arrow_right from "./right_arrow.png";
 import arrow_left from "./left_arrow.png";
 import spotify_logo from "./spotify_logo.png";
 import clock_icon from "./clock_icon.png";
+import hamburger from "./hamburger.png"
+import close from "./close.png"
+import whiteclose from "./whiteclose.jpeg"
+
 import img1 from "./img1.jpg";
 import img2 from "./img2.jpg";
 import img3 from "./img3.jpg";
@@ -81,6 +85,9 @@ export const assets = {
   arrow_right,
   spotify_logo,
   clock_icon,
+  hamburger,
+  close,
+  whiteclose
 };
 
 export const albumsData = [
@@ -217,7 +224,7 @@ export const songsData = [
   },
   {
     id: 8,
-    name: "Suniyan suniyan",
+    name: "Suniyan",
     image: rrsong1,
     file: rsong1,
     desc: "raatein de vich tuuu",

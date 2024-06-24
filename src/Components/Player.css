@@ -1,0 +1,30 @@
+.leftPlayer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.rightPlayer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1150px) {
+  .leftPlayer {
+    display: none;
+  }
+  .rightPlayer{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .timee {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .timee {
+    font-size: 14px;
+  }
+}
