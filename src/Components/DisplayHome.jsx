@@ -8,36 +8,21 @@ import { useLocation } from 'react-router-dom';
 
 const DisplayHome = () => {
     const location = useLocation();
-    // useEffect(() => {
-    //     // Check if the page has been loaded before using sessionStorage
-    //     const hasReloaded = sessionStorage.getItem('hasReloaded');
-    //     console.log(hasReloaded)
-    //     if (!hasReloaded) {
-    //         // Set the flag to indicate the page has been reloaded
-    //         sessionStorage.setItem('hasReloaded', 'true');
+    useEffect(() => {
+        // Check if the page has been loaded before using sessionStorage
+        const hasReloaded = sessionStorage.getItem('hasReloaded');
+        console.log(hasReloaded)
+        if (!hasReloaded) {
+            // Set the flag to indicate the page has been reloaded
+            sessionStorage.setItem('hasReloaded', 'true');
 
-    //         // Reload the page
-    //         window.location.reload();
-    //     }
+            // Reload the page
+            window.location.reload();
+        }
          
-    // }, [location.pathname]);
-    // useEffect(() => {
-    //     const hasReloaded = sessionStorage.getItem('hasReloaded');
-
-    //     if (!hasReloaded) {
-    //         // Set the flag to indicate the page has been reloaded
-    //         sessionStorage.setItem('hasReloaded', 'true');
-
-    //         // Reload the page
-    //         window.location.reload();
-    //     } else {
-    //         // Remove the flag for future navigations (optional)
-    //         sessionStorage.removeItem('hasReloaded');
-    //     }
-    // }, [location.key]);
-
-  
+    }, [location.pathname]);
  
+   
 
     return (
         <div>
