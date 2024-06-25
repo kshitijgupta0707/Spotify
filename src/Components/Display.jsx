@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import DisplayHome from './DisplayHome'
 import DisplayAlbum from './DisplayAlbum'
 import { albumsData } from '../assets/assets'
 import Search from './Search'
 import Songscreen from './Songscreen'
+import { PlayerContext } from '../Context/PlayerContext'
 const Display = () => {
+  const { play, pause, playStatus } = useContext(PlayerContext);
 
   const displayRef = useRef();
   const location = useLocation();
@@ -26,6 +28,8 @@ const Display = () => {
   })
 
 
+
+
   //  console.log(location);
   //  console.log(displayRef);
   return (
@@ -42,7 +46,7 @@ const Display = () => {
         <Route path='/song' element={<Songscreen />}>
         </Route>
 
-        
+
         <Route path='/search' element={<Search />}>
         </Route>
 

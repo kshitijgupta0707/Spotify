@@ -145,7 +145,7 @@ export const albumsData = [
     image: _govindbolo,
     desc: "Your weekly update of the most played tracks",
     bgColor: "#744210",
-    songs: [11, 12, 13],
+    songs: [11, 12],
   },
   {
     id: 7,
@@ -246,18 +246,10 @@ export const songsData = [
     desc: "din ko raat khu",
     duration: "3:33",
   },
+
   
   {
     id: 11,
-    name: "Saja-do-ghar-ko-gulshan-sa",
-    image: _sajadogharko,
-    file: sajadogharko,
-    desc: "Hare krishna",
-    duration: "8:43",
-  },
-  
-  {
-    id: 12,
     name: "kitna pyaara hain",
     image: _kitnapyarahain,
     file: kitnapyarahain,
@@ -266,7 +258,7 @@ export const songsData = [
   }
   ,
   {
-    id: 13,
+    id: 12,
     name: "Govind-bolo",
     image: _govindbolo,
     file: govindbolo,

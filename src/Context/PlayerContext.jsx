@@ -31,6 +31,7 @@ const PlayerContextProvider = (props) => {
     const [loaded, setLoaded] = useState(false);
     const handleVolumeChange = (event) => {
         const newVolume = event.target.value;
+        console.log(`Volume set to ${newVolume}`);
         setVolume(newVolume);
         audioRef.current.volume = newVolume;
     };

@@ -29,27 +29,7 @@ const Layout = () => {
     // }, []); // Empty dependency array ensures this effect runs only once
 
 
-    // document.addEventListener('keyup', (e) => {
-    //     console.log(e);
-    //     console.log(e.code);
-    //     if (e.code == 'Space') {
-    //         console.log('playsong')
-    //         if (playStatus) {
-    //             pause();
-    //         }
-    //         else {
-    //             play();
-    //         }
-
-    //     }
-    //     else if (e.code == 'ArrowRight') {
-    //         next();
-    //     }
-    //     else if (e.code == 'ArrowLeft') {
-    //         prev();
-    //     }
-    // })
-
+  
 
     
 

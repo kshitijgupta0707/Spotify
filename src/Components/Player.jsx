@@ -7,9 +7,9 @@ const Player = () => {
 
     const navigate = useNavigate();
     const location = useLocation().pathname;
-    const { track, seekBar, seekBar2, seekBg, playStatus, setPlayStatus, pause, play, time, setTime, next, prev, handleVolumeChange, volume, audioRef, handleSeek, onlyChangeSlideBar, handleMouseUp, handleMouseDown} = useContext(PlayerContext);
+    const { track, seekBar, seekBar2, seekBg, playStatus, setPlayStatus, pause, play, time, setTime, next, prev, handleVolumeChange, volume, audioRef, handleSeek, onlyChangeSlideBar, handleMouseUp, handleMouseDown } = useContext(PlayerContext);
 
-  
+
 
 
     return (
@@ -18,14 +18,14 @@ const Player = () => {
                 <img onClick={() => {
                     console.log(location);
                     if (location === '/song')
-                        navigate('/');
+                        navigate('/home');
                     else
                         navigate('/song')
 
 
                 }} className='w-12' src={track.image} alt="" />
                 <div>
-                    <p>{track.name.slice(0,23)}</p>
+                    <p>{track.name.slice(0, 23)}</p>
                     <p>{track.desc.slice(0, 12)}</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@ const Player = () => {
                 <img onClick={() => {
                     console.log(location);
                     if (location === '/song')
-                        navigate('/');
+                        navigate('/home');
                     else
                         navigate('/song')
 
